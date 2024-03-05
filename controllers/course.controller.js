@@ -9,6 +9,20 @@ export const createCourse = async (req, res) => {
         .status(400)
         .json({ status: "error", error: "All Fields Required" });
     }
+    const allCourses = await prisma.course.findMany({
+      where: {
+        user: req.user.email,
+      },
+    });
+    if (
+      allCourses.length >= 1 &&
+      req.user.email !== "autipruthviraj@gmail.com"
+    ) {
+      return res.status(400).json({
+        error: "You can add only one course!, contact support for more details",
+      });
+    }
+    console.log("lenght", allCourses.length);
     const course = await prisma.course.create({
       data: {
         name,
