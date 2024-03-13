@@ -42,7 +42,7 @@ export const createCourse = async (req, res) => {
 export const getAllCourses = async (req, res) => {
   try {
     const courses = await prisma.course.findMany();
-    await prisma.Ip.create({
+    await prisma.ip.create({
       data: {
         ip_address: req.ip,
       },
