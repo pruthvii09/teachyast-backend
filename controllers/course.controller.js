@@ -42,11 +42,11 @@ export const createCourse = async (req, res) => {
 export const getAllCourses = async (req, res) => {
   try {
     const courses = await prisma.course.findMany();
-    await prisma.ip.create({
-      data: {
-        ip_address: req.ip,
-      },
-    });
+    // await prisma.ip.create({
+    //   data: {
+    //     ip_address: req.ip,
+    //   },
+    // });
     res.status(200).json({ status: "success", data: courses });
     console.log(req.ip);
   } catch (error) {
